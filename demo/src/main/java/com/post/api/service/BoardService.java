@@ -19,6 +19,12 @@ public class BoardService {
  
         return boardMapper.boardList();
     }
+	
+	public List<BoardDTO> boardSearch(String select, String search) throws Exception {
+
+		 
+        return boardMapper.boardSearch(select, search);
+    }
 
     public int insertBoard(BoardDTO boardDTO) throws Exception{
 	    return boardMapper.insertBoard(boardDTO);

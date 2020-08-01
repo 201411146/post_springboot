@@ -9,28 +9,37 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 @RestController
 @RequestMapping("/api")
 public class BoardController {
 
 	@Autowired
-    BoardService boardService;
+	BoardService boardService;
 
-    @GetMapping("/")
-    public List<BoardDTO> boardList() throws Exception {
+	@GetMapping("/boards")
+	public List<BoardDTO> boardList(HttpServletRequest req) throws Exception {
+		String select = req.getParameter("select");
+		String search = req.getParameter("search");
+		List<BoardDTO> boardList;
+		if (select == null) {
+			boardList = boardService.boardList();
+		} else {
+			boardList = boardService.boardSearch(select, search);
+		}
 
-        List<BoardDTO> boardList = boardService.boardList();
-        System.out.println(boardList.get(0));
-        return boardList;
-    }
+		return boardList;
+	}
+	
 
-    @PostMapping("/board")
-    public Map<String, Object> createBoard(@ModelAttribute BoardDTO boardDTO) throws Exception{
 
-        Map<String, Object> resultMap = new HashMap<>();
-        boardService.insertBoard(boardDTO);
-        return resultMap;
-    }
+	@PostMapping("/board")
+	public Map<String, Object> createBoard(@ModelAttribute BoardDTO boardDTO) throws Exception {
 
+		Map<String, Object> resultMap = new HashMap<>();
+		boardService.insertBoard(boardDTO);
+		return resultMap;
+	}
 
 }

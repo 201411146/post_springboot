@@ -3,13 +3,23 @@
 <mapper namespace="com.post.api.mapper.BoardMapper">
 
 
-
+	<!-- 게시물 목록 -->
     <select id="boardList" resultType="com.post.api.dto.BoardDTO">
         SELECT
         *
         FROM
         board
     </select>
+    
+    <!-- 게시물 검색 -->
+    <select id="boardSearch" resultType="com.post.api.dto.BoardDTO">
+        SELECT
+        *
+        FROM
+        board
+        where ${select} = #{search}
+    </select>
+    
     <insert id="insertBoard" useGeneratedKeys="true" keyProperty="id">
 
     </insert>
