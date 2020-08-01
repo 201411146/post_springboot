@@ -11,4 +11,5 @@ import com.post.api.dto.BoardDTO;
 public interface BoardMapper {
 
 	public List<BoardDTO> boardList();
+	public int insertBoard(BoardDTO boardDTO);
 }

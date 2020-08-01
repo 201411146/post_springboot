@@ -10,6 +10,9 @@
         FROM
         board
     </select>
+    <insert id="insertBoard" useGeneratedKeys="true" keyProperty="id">
+
+    </insert>
 
 
 </mapper>

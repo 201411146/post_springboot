@@ -19,4 +19,8 @@ public class BoardService {
  
         return boardMapper.boardList();
     }
+
+    public int insertBoard(BoardDTO boardDTO) throws Exception{
+	    return boardMapper.insertBoard(boardDTO);
+    }
 }
