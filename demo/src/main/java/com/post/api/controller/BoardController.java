@@ -8,17 +8,18 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.post.api.dto.BoardDTO;
 import com.post.api.mapper.BoardMapper;
+import com.post.api.service.BoardService;
 
 @RestController
 public class BoardController {
 
 	@Autowired
-    BoardMapper a;
+    BoardService boardService;
 
     @GetMapping("/")
-    public List<BoardDTO> users() throws Exception {
+    public List<BoardDTO> boardList() throws Exception {
 
-        List<BoardDTO> boardList = a.boardList();
+        List<BoardDTO> boardList = boardService.boardList();
         return boardList;
     }
 }
