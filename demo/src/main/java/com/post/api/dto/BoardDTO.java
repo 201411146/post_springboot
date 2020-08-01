@@ -9,6 +9,6 @@ public class BoardDTO {
     private int id;
     private String title;
     private String content;
-    private String category;
+    private int categoryId;
     private Date modifyDate;
 }
