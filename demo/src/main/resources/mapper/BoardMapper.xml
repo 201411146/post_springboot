@@ -4,14 +4,20 @@
 
 
 
-    <select id="boardList" resultType="com.post.api.dto.BoardDTO">
+    <select id="boardList" resultType="com.post.api.dto.BoardDto">
         SELECT
         *
         FROM
         board
     </select>
-    <insert id="insertBoard" useGeneratedKeys="true" keyProperty="id">
 
+    <insert id="insertBoard" parameterType="com.post.api.dto.BoardDto" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO board(
+            id, title, content, category_id, modify_date
+        )
+        VALUES(
+            #{id}, #{title}, #{content}, #{categoryId}, #{modifyDate}
+        )
     </insert>
 
 
