@@ -5,20 +5,17 @@
 
 
     <select id="boardList" resultType="com.post.api.dto.BoardDto">
-        SELECT
-        *
-        FROM
-        board
+        SELECT *
+        FROM board
     </select>
 
     <insert id="insertBoard" parameterType="com.post.api.dto.BoardDto" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO board(  <!-- create_date, modift_date의 default 값은 now() -->
-            id, title, content, category_id
-        )
-        VALUES(
-            #{id}, #{title}, #{content}, #{categoryId}
-        )
+        INSERT INTO board(id, title, content, category_id)  <!-- create_date, modift_date의 default 값은 now() -->
+        VALUES(#{id}, #{title}, #{content}, #{categoryId})
     </insert>
 
+    <delete id="deleteBoard">
+        DELETE FROM board WHERE id = #{boardId}
+    </delete>
 
 </mapper>

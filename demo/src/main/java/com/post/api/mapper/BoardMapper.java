@@ -9,7 +9,7 @@ import com.post.api.dto.BoardDto;
 
 @Mapper
 public interface BoardMapper {
-
 	List<BoardDto> boardList();
 	int insertBoard(BoardDto boardDTO);
+	int deleteBoard(int boardId);
 }

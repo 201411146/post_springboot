@@ -2,6 +2,7 @@ package com.post.api.controller;
 
 import com.post.api.dto.BoardDto;
 import com.post.api.service.BoardService;
+import com.sun.xml.internal.ws.policy.EffectiveAlternativeSelector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,10 +16,11 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin("*")   // ajax 테스트를 위해 잠시 cors 허용
 public class BoardController {
 
 	@Autowired
-    BoardService boardService;
+    BoardService boardService;  // 생성자 주입을 @Autowired를 사용하는 필드 주입보다 권장하는 이유 (https://madplay.github.io/post/why-constructor-injection-is-better-than-field-injection 참조)
 
     @GetMapping("/")
     public List<BoardDto> boardList(){
@@ -28,7 +30,7 @@ public class BoardController {
     }
 
     @PostMapping("/board")
-    public Map<String, Object> createBoard(@RequestBody BoardDto boardDto) {
+    public Map<String, Object> insertBoard(@RequestBody BoardDto boardDto) {    // https://codepen.io/rlfalsgh95/pen/abNbpxv (ajax를 이용한 테스트 코드)
         Map<String, Object> resultMap = new HashMap<>();
         int insertKey  = 0;
 
@@ -37,11 +39,21 @@ public class BoardController {
             insertKey = boardDto.getId();   // 자동으로 생성된 key value
             resultMap.put("result", "success");
         }catch(Exception e){
+            e.printStackTrace();
             resultMap.put("result", "fail");
         }
 
         return resultMap;
     }
 
+    @DeleteMapping("/board/{id}")   // https://codepen.io/rlfalsgh95/pen/dyMyWjL (ajax를 이용한 테스트 코드)
+    public Map<String, Object> deleteBoard(@PathVariable(name = "id", required = true) int boardId){
+        Map<String, Object> resultMap = new HashMap<>();
 
+        int deleteCount = boardService.deleteBoard(boardId);
+        boolean deleteResult = (deleteCount != 0) ? true : false;
+
+        resultMap.put("result", deleteResult);
+        return resultMap;
+    }
 }

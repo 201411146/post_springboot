@@ -21,4 +21,5 @@ public class BoardService {
     public int insertBoard(BoardDto boardDTO){
 	    return boardMapper.insertBoard(boardDTO);
     }
+    public int deleteBoard(int id){return boardMapper.deleteBoard(id);}
 }
