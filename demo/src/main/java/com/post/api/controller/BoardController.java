@@ -51,9 +51,25 @@ public class BoardController {
         Map<String, Object> resultMap = new HashMap<>();
 
         int deleteCount = boardService.deleteBoard(boardId);
-        boolean deleteResult = (deleteCount != 0) ? true : false;
+        String deleteResult = (deleteCount != 0) ? "success" : "fail";
 
         resultMap.put("result", deleteResult);
+        return resultMap;
+    }
+
+    @PutMapping("/board")
+    public Map<String, Object> updateBoard(@RequestBody BoardDto boardDto){
+        Map<String, Object> resultMap = new HashMap<>();
+
+        try{
+            int updateCount = boardService.updateBoard(boardDto);
+
+            String updateResult = (updateCount != 0) ? "success" : "fail";  // 요청에 id가 포함되지 않은 경우(null인 경우) 예외가 발생하지 않지만, updateCount가 0
+            resultMap.put("result", updateResult);
+        }catch(Exception e){
+            resultMap.put("result", "fail");
+        }
+
         return resultMap;
     }
 }
