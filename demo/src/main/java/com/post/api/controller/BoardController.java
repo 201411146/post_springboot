@@ -22,7 +22,7 @@ public class BoardController {
 	@Autowired
     BoardService boardService;  // 생성자 주입을 @Autowired를 사용하는 필드 주입보다 권장하는 이유 (https://madplay.github.io/post/why-constructor-injection-is-better-than-field-injection 참조)
 
-    @GetMapping("/")
+    @GetMapping("/board")
     public List<BoardDto> boardList(){
 
         List<BoardDto> boardList = boardService.boardList();
@@ -57,7 +57,7 @@ public class BoardController {
         return resultMap;
     }
 
-    @PutMapping("/board")
+    @PutMapping("/board")   // https://codepen.io/rlfalsgh95/pen/OJNJzbw (ajax를 이용한 테스트)
     public Map<String, Object> updateBoard(@RequestBody BoardDto boardDto){
         Map<String, Object> resultMap = new HashMap<>();
 
