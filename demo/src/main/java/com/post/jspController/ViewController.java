@@ -7,9 +7,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/board")
 public class ViewController {
-    @GetMapping("/test")
-    public String testController(){
-        return "hello";
+    @GetMapping("/list")
+    public String boardList(){
+        return "boardList";
+    }
+    @GetMapping("/insert")
+    public String insertBoard() {
+        return "insertBoard";
+    }
+    @GetMapping("/update")
+    public String updateBoard(){
+        return "updateBoard";
     }
 
 }

@@ -13,16 +13,15 @@
     <title>게시판</title>
 </head>
 <body>
-    <span class = "board-num">전체 글(0)</span>
+    <span class = "board-num">전체 글(0)</span><br><br>
 
-    <div class = "board-container">
+    <div class = "board-container"></div><br>
+    <a href="/board/insert">게시글 작성</a>
 
-    </div>
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-
     <script>
         (function getboards(){
-            const url = "http://localhost:8080/api/board"
+            const url = "/api/board"
             const container = $(".board-container");
             const totalBoardElem = $(".board-num");
             let totalBoardNum = 0;
@@ -36,7 +35,8 @@
                     for(let board of response){
                         const title = board.title;
                         const createDate = board.createDate;
-                        container.append(`<a href = "#">${title}</a> ${createDate}<br> `)
+                        const boardNum = board.id;
+                        container.append(`${boardNum} <a href = "#">${title}</a> ${createDate}<br> `)
                     }
                 },
                 complete : function(){
