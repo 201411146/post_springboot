@@ -19,3 +19,6 @@ nbbuild/
 dist/
 nbdist/
 .nb-gradle/
+
+### secure ###
+src/main/resources/application.properties
