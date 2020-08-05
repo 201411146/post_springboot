@@ -1,15 +1,21 @@
 package com.post.api.controller;
 
-import com.post.api.dto.BoardDTO;
-import com.post.api.service.BoardService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.post.api.dto.BoardDto;
+import com.post.api.service.BoardService;
 
 @RestController
 @RequestMapping("/api")
@@ -19,10 +25,10 @@ public class BoardController {
 	BoardService boardService;
 
 	@GetMapping("/boards")
-	public List<BoardDTO> boardList(HttpServletRequest req) throws Exception {
+	public List<BoardDto> boardList(HttpServletRequest req) throws Exception {
 		String select = req.getParameter("select");
 		String search = req.getParameter("search");
-		List<BoardDTO> boardList;
+		List<BoardDto> boardList;
 		if (select == null) {
 			boardList = boardService.boardList();
 		} else {
@@ -35,7 +41,7 @@ public class BoardController {
 
 
 	@PostMapping("/board")
-	public Map<String, Object> createBoard(@ModelAttribute BoardDTO boardDTO) throws Exception {
+	public Map<String, Object> createBoard(@ModelAttribute BoardDto boardDTO) throws Exception {
 
 		Map<String, Object> resultMap = new HashMap<>();
 		boardService.insertBoard(boardDTO);
