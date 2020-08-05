@@ -8,7 +8,7 @@ import java.util.Date;
 
 @Setter
 @Getter
-@ToString
+@ToString	
 public class BoardDto {
     private int id;
     private String title;

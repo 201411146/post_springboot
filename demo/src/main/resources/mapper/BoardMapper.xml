@@ -8,6 +8,12 @@
         SELECT *
         FROM board
     </select>
+    
+    <select id="boardSearch" resultType="com.post.api.dto.BoardDto">
+        SELECT *
+        FROM board
+        where ${select} LIKE concat('%', #{search}, '%') 
+    </select>
 
     <insert id="insertBoard" parameterType="com.post.api.dto.BoardDto" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO board(id, title, content, category_id)  <!-- create_date, modift_date의 default 값은 now() -->
