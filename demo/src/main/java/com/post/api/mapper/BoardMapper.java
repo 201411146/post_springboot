@@ -9,7 +9,6 @@ import com.post.api.dto.BoardDto;
 
 @Repository
 public interface BoardMapper {
-
 	List<BoardDto> boardList();
 	List<BoardDto> boardSearch(String select, String search);
 	int deleteBoard(int id);
