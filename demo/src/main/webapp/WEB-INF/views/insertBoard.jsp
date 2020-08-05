@@ -29,7 +29,7 @@
             const url = form.action;
 
             const title = $("input[name = 'title']").val();
-            const content = $("input[name = 'content']").val();
+            const content = $("textarea[name = 'content']").val();
             const categoryId = $("input[name = 'categoryId']").val();
 
             const data = {
@@ -45,6 +45,10 @@
                 success: function(response){
                     alert(response.result)
                     location.href = "/board/list"
+
+                    if(response.result === "success"){
+                        location.href = "/board/list"
+                    }
                 },
                 error: function (req, status, error) {
                     alert("error")

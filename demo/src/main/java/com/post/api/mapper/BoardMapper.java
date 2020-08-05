@@ -10,7 +10,9 @@ import com.post.api.dto.BoardDto;
 @Repository
 public interface BoardMapper {
 
-	public List<BoardDto> boardList();
-	public List<BoardDto> boardSearch(String select, String search);
-	public int insertBoard(BoardDto boardDTO);
+	List<BoardDto> boardList();
+	List<BoardDto> boardSearch(String select, String search);
+	int deleteBoard(int id);
+	int updateBoard(BoardDto boardDto);
+	int insertBoard(BoardDto boardDTO);
 }

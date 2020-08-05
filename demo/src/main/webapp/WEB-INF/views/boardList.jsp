@@ -21,7 +21,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         (function getboards(){
-            const url = "/api/board"
+            const url = "/api/boards"
             const container = $(".board-container");
             const totalBoardElem = $(".board-num");
             let totalBoardNum = 0;

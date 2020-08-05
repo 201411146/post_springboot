@@ -26,7 +26,15 @@ public class BoardService {
         return boardMapper.boardSearch(select, search);
     }
 
-    public int insertBoard(BoardDto boardDTO) throws Exception{
+    public int insertBoard(BoardDto boardDTO){
 	    return boardMapper.insertBoard(boardDTO);
+    }
+
+    public int deleteBoard(int id){
+	    return boardMapper.deleteBoard(id);
+    }
+
+    public int updateBoard(BoardDto boardDto){
+	    return boardMapper.updateBoard(boardDto);
     }
 }
