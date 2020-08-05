@@ -14,13 +14,11 @@ public class BoardService {
 	@Autowired
     BoardMapper boardMapper;
 	
-	public List<BoardDto> boardList() throws Exception {
-
- 
+	public List<BoardDto> boardList(){
         return boardMapper.boardList();
     }
 
-    public int insertBoard(BoardDto boardDTO) throws Exception{
+    public int insertBoard(BoardDto boardDTO){
 	    return boardMapper.insertBoard(boardDTO);
     }
 }

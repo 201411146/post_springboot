@@ -1,8 +1,10 @@
 package com.post.api.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Setter
+@Getter
 public class CategoryDto {
     private int id;
     private String name;

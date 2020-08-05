@@ -12,11 +12,11 @@
     </select>
 
     <insert id="insertBoard" parameterType="com.post.api.dto.BoardDto" useGeneratedKeys="true" keyProperty="id">
-        INSERT INTO board(
-            id, title, content, category_id, modify_date
+        INSERT INTO board(  <!-- create_date, modift_date의 default 값은 now() -->
+            id, title, content, category_id
         )
         VALUES(
-            #{id}, #{title}, #{content}, #{categoryId}, #{modifyDate}
+            #{id}, #{title}, #{content}, #{categoryId}
         )
     </insert>
 
