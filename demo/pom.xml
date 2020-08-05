@@ -67,6 +67,18 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
+
+		<!-- spring boot 에선 기본적으로 JSP VIEW를 지원하지 않기 때문에 임의로 dependency를 추가 -->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+		</dependency>
+
+		<!-- jsp reload를 위해 dependency 추가 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
