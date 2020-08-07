@@ -55,7 +55,8 @@ public class BoardController {
 		}
 
 		Map<String, Object> resultMap = new HashMap<>();
-
+		
+		resultMap.put("totalCount", totalCount);
 		resultMap.put("pagingCount", pagingCount);
 		resultMap.put("boardList", boardList);
 
