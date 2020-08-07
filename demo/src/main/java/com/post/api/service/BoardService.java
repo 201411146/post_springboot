@@ -14,16 +14,16 @@ public class BoardService {
 	@Autowired
     BoardMapper boardMapper;
 	
-	public List<BoardDto> boardList() throws Exception {
+	public List<BoardDto> boardList(int start) throws Exception {
 
  
-        return boardMapper.boardList();
+        return boardMapper.boardList(start);
     }
 	
-	public List<BoardDto> boardSearch(String select, String search) throws Exception {
+	public List<BoardDto> boardSearch(int start, String select, String search) throws Exception {
 
 		 
-        return boardMapper.boardSearch(select, search);
+        return boardMapper.boardSearch(start, select, search);
     }
 
     public BoardDto getBoardById(int boardId){

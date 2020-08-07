@@ -7,12 +7,14 @@
     <select id="boardList" resultType="com.post.api.dto.BoardDto">
         SELECT *
         FROM board
+        LIMIT #{start}, 5
     </select>
     
     <select id="boardSearch" resultType="com.post.api.dto.BoardDto">
         SELECT *
         FROM board
         where ${select} LIKE concat('%', #{search}, '%') 
+        LIMIT #{start}, 5
     </select>
 
     <select id="getBoardById" resultType="com.post.api.dto.BoardDto">
