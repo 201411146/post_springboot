@@ -17,6 +17,17 @@
         LIMIT #{start}, 5
     </select>
 
+	<select id="getTotalCount" resultType="int">
+        SELECT count(*)
+        FROM board
+    </select>
+    
+    <select id="getSearchCount" resultType="int">
+        SELECT count(*)
+        FROM board
+        where ${select} LIKE concat('%', #{search}, '%')
+    </select>
+
     <select id="getBoardById" resultType="com.post.api.dto.BoardDto">
         SELECT id, title, content, category_id, create_date, modify_date
         FROM board

@@ -26,18 +26,28 @@ public class BoardController {
 								// 참조)
 
 	@GetMapping("/boards")
-	public List<BoardDto> getBoardList(@RequestParam(name = "start", defaultValue = "0") int start,
+	public Map<String, Object> getBoardList(@RequestParam(name = "start", defaultValue = "1") int start,
 			@RequestParam(name = "select", required = false) String select,
 			@RequestParam(name = "search", required = false) String search) throws Exception {
 
+		int totalCount;
 		List<BoardDto> boardList;
+
 		if (select == null) {
-			boardList = boardService.boardList(start);
+			boardList = boardService.boardList((start - 1) * 5);
+			totalCount = boardService.getTotalCount();
 		} else {
-			boardList = boardService.boardSearch(start, select, search);
+			boardList = boardService.boardSearch((start - 1) * 5, select, search);
+			totalCount = boardService.getSearchCount(select, search);
 		}
 
-		return boardList;
+		int pagingCount = totalCount / 5 + 1;
+		Map<String, Object> resultMap = new HashMap<>();
+
+		resultMap.put("pagingCount", pagingCount);
+		resultMap.put("boardList", boardList);
+
+		return resultMap;
 	}
 
 	@GetMapping("/board/{id}")

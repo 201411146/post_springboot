@@ -22,9 +22,17 @@ public class BoardService {
 	
 	public List<BoardDto> boardSearch(int start, String select, String search) throws Exception {
 
-		 
+		System.out.println(start);
         return boardMapper.boardSearch(start, select, search);
     }
+	
+	public int getTotalCount() {
+		return boardMapper.getTotalCount();
+	}
+	
+	public int getSearchCount(String select, String search) {
+		return boardMapper.getSearchCount(select, search);
+	}
 
     public BoardDto getBoardById(int boardId){
         return boardMapper.getBoardById(boardId);
