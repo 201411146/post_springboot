@@ -5,6 +5,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequestMapping("/board")
@@ -22,9 +23,11 @@ public class ViewController {
     }
 
     @GetMapping("/list")
-    public String boardList(){
+    public String boardList(@RequestParam(name = "start", defaultValue = "1") int start, ModelMap modelMap){
+        modelMap.addAttribute("start", start);
         return "boardList";
     }
+
     @GetMapping("/insert")
     public String insertBoard() {
         return "insertBoard";

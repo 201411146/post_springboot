@@ -6,7 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page isELIgnored="true"%> <!-- 템플릿 문자열을 사용하기 위해 el ignore-->
+<%-- <%@ page isELIgnored="true"%> <!-- 템플릿 문자열을 사용하기 위해 el ignore-->--%>
 
 <html>
 <head>
@@ -16,30 +16,41 @@
     <span class = "board-num">전체 글(0)</span><br><br>
 
     <div class = "board-container"></div><br>
+    <div class = "paging"></div>
+
     <button onclick="location.href='/board/insert'">게시글 작성</button>
+
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         (function getboards(){
-            const url = "/api/boards"
-            const container = $(".board-container");
-            const totalBoardElem = $(".board-num");
+            const url = "/api/boards?start=${start}"
             let totalBoardNum = 0;
 
             $.ajax({
                 type : "GET",
                 url : url,
                 success : function(response){
-                    totalBoardNum = response.length;
+                    const container = $(".board-container");
+                    const pagingElem = $(".paging");
 
-                    for(let board of response){
+                    totalBoardNum = response.totalCount;
+
+                    for(let board of response.boardList){
                         const title = board.title;
                         const createDate = board.createDate;
                         const boardNum = board.id;
-                        container.append(`${boardNum} <a href = "/board/${boardNum}">${title}</a> ${createDate}<br> `)
+                        container.append(`${'${boardNum}'} <a href = "/board/${'${boardNum}'}">${'${title}'}</a> ${'${createDate}'}<br>`)
                     }
+
+                    for(let i = 1; i <= response.pagingCount; i++){
+                        pagingElem.append(`<a href="/board/list?start=${'${i}'}">${'${i}'}</a> `);
+                    }
+
                 },
                 complete : function(){
+                    const totalBoardElem = $(".board-num");
+
                     totalBoardElem.text(`전체 글(${totalBoardNum})`)
                 }
             })

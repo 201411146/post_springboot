@@ -16,6 +16,9 @@ import java.util.Map;
 // TODO : serivice
 // TODO : category
 
+// 맵을 api의 결과로 반환할 때는 resultMap으로 반환
+// Map이 다양한 타입을 value로 가지는 경우 Map<String, Object> 사용
+
 @RestController
 @RequestMapping("/api")
 public class BoardController {
