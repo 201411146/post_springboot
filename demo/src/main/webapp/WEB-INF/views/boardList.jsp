@@ -16,7 +16,7 @@
     <span class = "board-num">전체 글(0)</span><br><br>
 
     <div class = "board-container"></div><br>
-    <a href="/board/insert">게시글 작성</a>
+    <button onclick="location.href='/board/insert'">게시글 작성</button>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
@@ -36,7 +36,7 @@
                         const title = board.title;
                         const createDate = board.createDate;
                         const boardNum = board.id;
-                        container.append(`${boardNum} <a href = "#">${title}</a> ${createDate}<br> `)
+                        container.append(`${boardNum} <a href = "/board/${boardNum}">${title}</a> ${createDate}<br> `)
                     }
                 },
                 complete : function(){

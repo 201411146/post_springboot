@@ -44,7 +44,6 @@
                 data: JSON.stringify(data),
                 success: function(response){
                     alert(response.result)
-                    location.href = "/board/list"
 
                     if(response.result === "success"){
                         location.href = "/board/list"

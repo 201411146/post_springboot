@@ -15,6 +15,12 @@
         where ${select} LIKE concat('%', #{search}, '%') 
     </select>
 
+    <select id="getBoardById" resultType="com.post.api.dto.BoardDto">
+        SELECT id, title, content, category_id, create_date, modify_date
+        FROM board
+        WHERE id = #{boardId}
+    </select>
+
     <insert id="insertBoard" parameterType="com.post.api.dto.BoardDto" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO board(id, title, content, category_id)  <!-- create_date, modift_date의 default 값은 now() -->
         VALUES(#{id}, #{title}, #{content}, #{categoryId})

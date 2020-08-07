@@ -1,5 +1,6 @@
 package com.post.api.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -14,6 +15,9 @@ public class BoardDto {
     private String title;
     private String content;
     private int categoryId;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createDate;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date modifyDate;
 }

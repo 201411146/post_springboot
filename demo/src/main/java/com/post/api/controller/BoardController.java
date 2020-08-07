@@ -12,6 +12,10 @@ import java.util.List;
 import java.util.Map;
 
 // TODO: mysql timezone 수정
+// TODO : throws
+// TODO : 메서드, 변수 네이밍
+// TODO : serivice
+// TODO : category
 
 @RestController
 @RequestMapping("/api")
@@ -21,9 +25,10 @@ public class BoardController {
 	BoardService boardService;	// 생성자 주입을 @Autowired를 사용하는 필드 주입보다 권장하는 이유 (https://madplay.github.io/post/why-constructor-injection-is-better-than-field-injection 참조)
 
 	@GetMapping("/boards")
-	public List<BoardDto> boardList(HttpServletRequest req) throws Exception {
+	public List<BoardDto> getBoardList(HttpServletRequest req) throws Exception {
 		String select = req.getParameter("select");
 		String search = req.getParameter("search");
+
 		List<BoardDto> boardList;
 		if (select == null) {
 			boardList = boardService.boardList();
@@ -32,6 +37,11 @@ public class BoardController {
 		}
 
 		return boardList;
+	}
+
+	@GetMapping("/board/{id}")
+	public BoardDto getBoardById(@PathVariable(name = "id", required = true)int boardId){
+		return boardService.getBoardById(boardId);
 	}
 
 	@PostMapping("/board")
@@ -72,6 +82,7 @@ public class BoardController {
 			String updateResult = (updateCount != 0) ? "success" : "fail";  // 요청에 id가 포함되지 않은 경우(null인 경우) 예외가 발생하지 않지만, updateCount가 0
 			resultMap.put("result", updateResult);
 		}catch(Exception e){
+			e.printStackTrace();
 			resultMap.put("result", "fail");
 		}
 

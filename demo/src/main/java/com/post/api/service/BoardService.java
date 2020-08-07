@@ -26,6 +26,10 @@ public class BoardService {
         return boardMapper.boardSearch(select, search);
     }
 
+    public BoardDto getBoardById(int boardId){
+        return boardMapper.getBoardById(boardId);
+    }
+
     public int insertBoard(BoardDto boardDTO){
 	    return boardMapper.insertBoard(boardDTO);
     }
