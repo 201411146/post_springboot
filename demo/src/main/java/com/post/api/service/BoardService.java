@@ -22,7 +22,7 @@ public class BoardService {
 	
 	public List<BoardDto> boardSearch(int start, String select, String search) throws Exception {
 
-		System.out.println(start);
+		
         return boardMapper.boardSearch(start, select, search);
     }
 	

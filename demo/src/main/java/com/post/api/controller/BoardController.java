@@ -32,19 +32,28 @@ public class BoardController {
 	public Map<String, Object> getBoardList(@RequestParam(name = "start", defaultValue = "1") int start,
 			@RequestParam(name = "select", required = false) String select,
 			@RequestParam(name = "search", required = false) String search) throws Exception {
-
+		final int stratValue = (start - 1) * 5;
+		
 		int totalCount;
+		int pagingCount;
 		List<BoardDto> boardList;
 
 		if (select == null) {
-			boardList = boardService.boardList((start - 1) * 5);
+			boardList = boardService.boardList(stratValue);
 			totalCount = boardService.getTotalCount();
 		} else {
-			boardList = boardService.boardSearch((start - 1) * 5, select, search);
+			boardList = boardService.boardSearch(stratValue, select, search);
 			totalCount = boardService.getSearchCount(select, search);
 		}
 
-		int pagingCount = totalCount / 5 + 1;
+
+		
+		if(totalCount / 5 == 0) {
+			pagingCount = totalCount / 5 + 1;
+		}else {
+			pagingCount = totalCount / 5;
+		}
+
 		Map<String, Object> resultMap = new HashMap<>();
 
 		resultMap.put("pagingCount", pagingCount);
