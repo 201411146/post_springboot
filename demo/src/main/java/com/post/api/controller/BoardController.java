@@ -46,9 +46,7 @@ public class BoardController {
 			totalCount = boardService.getSearchCount(select, search);
 		}
 
-
-		
-		if(totalCount / 5 == 0) {
+		if(totalCount % 5 != 0) {
 			pagingCount = totalCount / 5 + 1;
 		}else {
 			pagingCount = totalCount / 5;

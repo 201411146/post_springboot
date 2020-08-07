@@ -15,16 +15,38 @@
 <body>
     <span class = "board-num">전체 글(0)</span><br><br>
 
+    <form onsubmit="searchBoards()">
+        <input type="text" name = "search">
+        <select class = "select-search" name="select">
+            <option value="title" id = "title">제목</option>
+            <option value="category_id" id = "categoryId">카테고리</option>
+            <option value="content" id = "content">내용</option>
+        </select>
+
+    </form>
+
     <div class = "board-container"></div><br>
-    <div class = "paging"></div>
+    <div class = "paging"></div><br>
 
     <button onclick="location.href='/board/insert'">게시글 작성</button>
 
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
-        (function getboards(){
-            const url = "/api/boards?start=${start}"
+        (function(){
+            const selectValue = '${select}';
+            const searchValue = '${search}';
+            let url;
+
+            if (selectValue !== "" && searchValue !== "")
+                url = `/api/boards?start=${start}&select=${'${selectValue}'}&search=${'${searchValue}'}`
+            else
+                url = `/api/boards?start=${start}`;
+
+            getboards(url);
+        })();
+
+        function getboards(url, select, search){
             let totalBoardNum = 0;
 
             $.ajax({
@@ -44,17 +66,24 @@
                     }
 
                     for(let i = 1; i <= response.pagingCount; i++){
-                        pagingElem.append(`<a href="/board/list?start=${'${i}'}">${'${i}'}</a> `);
+                        let pageUrl
+
+                        if(select != undefined && search != undefined)
+                            pageUrl = `<a href="/board/list?start=${'${i}'}&select=${'${select}'}&search=${'${search}}'}">${'${i}'}</a> `;
+                        else
+                            pageUrl= `<a href="/board/list?start=${'${i}'}">${'${i}'}</a> `;
+
+                        pagingElem.append(pageUrl);
                     }
 
                 },
                 complete : function(){
                     const totalBoardElem = $(".board-num");
 
-                    totalBoardElem.text(`전체 글(${totalBoardNum})`)
+                    totalBoardElem.text(`전체 글(${'${totalBoardNum}'})`)
                 }
             })
-        })();
+        }
 
     </script>
 </body>

@@ -23,11 +23,15 @@ public class ViewController {
     }
 
     @GetMapping("/list")
-    public String boardList(@RequestParam(name = "start", defaultValue = "1") int start, ModelMap modelMap){
+    public String boardList(@RequestParam(name = "start", defaultValue = "1") int start,
+                            @RequestParam(name = "select", required = false) String select,
+                            @RequestParam(name = "search", required = false) String search, ModelMap modelMap){
+
+        modelMap.addAttribute("select", select);
+        modelMap.addAttribute("search", search);
         modelMap.addAttribute("start", start);
         return "boardList";
     }
-
     @GetMapping("/insert")
     public String insertBoard() {
         return "insertBoard";

@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <title>board</title>
@@ -18,11 +19,32 @@
         최근 수정일 : <span class = "board__modifyDate"></span><br>
         내용 : <textarea readonly class = "board__content" name="content" cols="50" rows="10"></textarea><br> <!-- readonly 속성을 주어 수정이 불가하도록 함 -->
         <button onclick="location.href = '/board/update/${id}'">게시글 수정</button>
+        <button onclick="deleteBoard()">게시글 삭제</button>
     </div>
 
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 
     <script>
+        function deleteBoard(event){
+            const boardNum = $(".board__boardNum").text();
+            const deleteUrl = `/api/board/${'${boardNum}'}`;
+
+            $.ajax({
+                type : "DELETE",
+                url : deleteUrl,
+                success : function(response){
+                    if(response.result == "success"){
+                        alert("게시글을 삭제하였습니다.")
+                        location.href = "/board/list"
+                    }else{
+                        alert("게시글을 삭제하지 못했습니다.")
+                    }
+                },
+                error : function (){
+                    alert("게시글을 삭제하지 못했습니다.")
+                }
+            })
+        }
         (function getBoard(){
             const url = "/api/board/" + ${id};
 
