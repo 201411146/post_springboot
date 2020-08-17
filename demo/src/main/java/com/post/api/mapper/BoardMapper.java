@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import com.post.api.dto.BoardDto;
 
-@Repository
 public interface BoardMapper {
 	List<BoardDto> boardList(int start);
 	List<BoardDto> boardSearch(int start, String select, String search);
